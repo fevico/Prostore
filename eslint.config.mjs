@@ -53,7 +53,7 @@ export default [
       'no-unused-private-class-members': 'warn',
       'no-constant-binary-expression': 'off',
     },
-  },
+  }, 
   {
     // Apply Next.js rules
     ...nextPlugin,
@@ -63,7 +63,7 @@ export default [
     ignores: [
       'node_modules/',
       '.next/',
-      'out/',
+      'out/',  
       'build/',
     ],
   },

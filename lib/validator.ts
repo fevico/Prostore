@@ -15,3 +15,9 @@ export const createProductSchema = z.object({
     description: z.string().min(3, {message: "Description must be at last 3 characters"}).max(500, {message: "Description is too long"}),
     price : currency
 })
+
+// schema for signing users in
+export const signInSchema = z.object({
+    email: z.string().email("Invalid email address"),
+    password: z.string().min(6, {message: "Password must be at least 6 characters"})
+});
