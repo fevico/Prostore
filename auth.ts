@@ -8,7 +8,7 @@ import type { NextAuthConfig } from "next-auth";
 
 export const config = {
   pages: {
-    signIn: "/sigin-in",
+    signIn: "/sign-in",
     error: "/sign-in",
   },
   session: {
@@ -24,6 +24,7 @@ export const config = {
       },
       async authorize(credentials) {
         if (credentials === null) return null;
+
         // find user in database
         const user = await prisma.user.findFirst({
           where: {
@@ -55,12 +56,32 @@ export const config = {
     async session({ session, user, trigger, token }: any) {
         // set the user d from the token 
       session.user.id = token.sub;
+      session.user.role = token.role;
+      session.user.name = token.name;
 
     //   if there is an update, set the user name
     if(trigger === "update"){
-        session.user.name = user.name;
+        session.user.name = user.name; 
     }
       return session;
+    },
+    async jwt({ token, user, trigger, session }: any) {
+      // Assign user fields to token 
+      if(user){ 
+        token.role = user.role;
+
+        // If user has no name then set the email 
+        if(user.name === "NO_NAME"){
+          token.name = user.email!.split("@")[0];
+
+          // update the database to reflect the token name 
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { name: token.name },
+          });
+        }
+      }
+      return token;    
     }
   }
 } satisfies NextAuthConfig; 

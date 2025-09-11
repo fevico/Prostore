@@ -8,7 +8,7 @@ const sampleData = {
       password: hashSync("123456", 10),
       role: "admin"
     },
-    {
+    {   
       name: "Jane",
       email: "user@example.com",
       password: hashSync("123456", 10),
