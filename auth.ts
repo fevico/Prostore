@@ -11,7 +11,7 @@ export const config = {
     signIn: "/sign-in",
     error: "/sign-in",
   },
-  session: {
+  session: {  
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
@@ -59,10 +59,10 @@ export const config = {
       session.user.role = token.role;
       session.user.name = token.name;
 
-    //   if there is an update, set the user name
+    //   if there is an update, set the user name 
     if(trigger === "update"){
         session.user.name = user.name; 
-    }
+    }  
       return session;
     },
     async jwt({ token, user, trigger, session }: any) {

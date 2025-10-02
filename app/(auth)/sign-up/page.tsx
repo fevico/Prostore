@@ -34,7 +34,7 @@ const SignUpPage = async(props: {
               Enter your information below to sign up.
             </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4">   
             {/* Form Here */}
             <SignUpForm/>
         </CardContent>
